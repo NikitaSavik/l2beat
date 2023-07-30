@@ -62,7 +62,7 @@ export function getProductionConfig(): Config {
       enabled: true,
       coingeckoApiKey: getEnv('COINGECKO_API_KEY'),
       ethereum: {
-        alchemyApiKey: getEnv('ETHEREUM_ALCHEMY_API_KEY'),
+        providerUrl: getEnv('ETHEREUM_PROVIDER_URL'),
         etherscanApiKey: getEnv('ETHERSCAN_API_KEY'),
         // Deployment of the first L2
         minBlockTimestamp: UnixTime.fromDate(new Date('2019-11-14T00:00:00Z')),

@@ -56,7 +56,7 @@ export function getLocalConfig(): Config {
       detailedTvlEnabled: detailedTvlEnabled,
       coingeckoApiKey: process.env.COINGECKO_API_KEY, // this is optional
       ethereum: ethereumTvlEnabled && {
-        alchemyApiKey: getEnv('ETHEREUM_ALCHEMY_API_KEY'),
+        providerUrl: getEnv('ETHEREUM_PROVIDER_URL'),
         etherscanApiKey: getEnv('ETHERSCAN_API_KEY'),
         minBlockTimestamp: UnixTime.now().add(-7, 'days').toStartOf('hour'),
       },
