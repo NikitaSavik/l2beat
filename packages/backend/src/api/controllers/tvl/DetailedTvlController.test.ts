@@ -1,6 +1,7 @@
 import { tokenList } from '@l2beat/config'
 import { Logger } from '@l2beat/shared'
 import {
+  assert,
   AssetId,
   ChainId,
   EthereumAddress,
@@ -124,6 +125,9 @@ describe(DetailedTvlController.name, () => {
           [USDC],
           Logger.SILENT,
           latestConfigHash,
+          {
+            skipUnsyncedDetailedTvl: false,
+          },
         )
 
         await controller.getDetailedTvlApiResponse()
@@ -192,6 +196,9 @@ describe(DetailedTvlController.name, () => {
           [USDC],
           Logger.SILENT,
           latestConfigHash,
+          {
+            skipUnsyncedDetailedTvl: false,
+          },
         )
 
         const result = await controller.getDetailedAssetTvlApiResponse(
@@ -201,7 +208,9 @@ describe(DetailedTvlController.name, () => {
           type,
         )
 
-        expect(result?.daily).toEqual({
+        assert(result.result === 'success')
+
+        expect(result.data.daily).toEqual({
           types: ['timestamp', USDC.symbol.toLowerCase(), 'usd'],
           data: getProjectAssetChartData(
             fakeReports.dailyReports,
@@ -210,7 +219,7 @@ describe(DetailedTvlController.name, () => {
           ),
         })
 
-        expect(result?.sixHourly).toEqual({
+        expect(result.data.sixHourly).toEqual({
           types: ['timestamp', USDC.symbol.toLowerCase(), 'usd'],
           data: getProjectAssetChartData(
             fakeReports.sixHourlyReports,
@@ -219,7 +228,7 @@ describe(DetailedTvlController.name, () => {
           ),
         })
 
-        expect(result?.hourly).toEqual({
+        expect(result.data.hourly).toEqual({
           types: ['timestamp', USDC.symbol.toLowerCase(), 'usd'],
           data: getProjectAssetChartData(
             fakeReports.hourlyReports,
