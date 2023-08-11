@@ -126,7 +126,7 @@ describe(DetailedTvlController.name, () => {
           Logger.SILENT,
           latestConfigHash,
           {
-            skipUnsyncedDetailedTvl: false,
+            errorOnUnsyncedDetailedTvl: false,
           },
         )
 
@@ -197,7 +197,7 @@ describe(DetailedTvlController.name, () => {
           Logger.SILENT,
           latestConfigHash,
           {
-            skipUnsyncedDetailedTvl: false,
+            errorOnUnsyncedDetailedTvl: false,
           },
         )
 
